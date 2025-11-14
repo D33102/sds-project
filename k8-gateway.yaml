@@ -1,0 +1,41 @@
+# ===================================================================
+#  GATEWAY: Krakend
+# ===================================================================
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: krakend-svc
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 8888
+      targetPort: 8888
+      nodePort: 30011
+  selector: { app: krakend }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: krakend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: krakend }
+  template:
+    metadata:
+      labels: { app: krakend }
+    spec:
+      containers:
+        - name: krakend
+          image: d33102/krakend-svc:latest
+          imagePullPolicy: IfNotPresent
+          args: ["run", "-c", "/etc/krakend/krakend.json"]
+          ports: [{ containerPort: 8888 }]
+          volumeMounts:
+            - name: krakend-config-volume
+              mountPath: /etc/krakend
+      volumes:
+        - name: krakend-config-volume
+          configMap: { name: krakend-config-cm }

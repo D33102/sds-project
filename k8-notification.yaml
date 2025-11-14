@@ -1,0 +1,74 @@
+# ===================================================================
+#  CORE: Notification Service
+# ===================================================================
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notification-service-svc
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8083
+      targetPort: 8083
+    - name: internal-rpc
+      port: 9999
+      targetPort: 9999
+  selector: { app: notification-service }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: notification-service }
+  template:
+    metadata:
+      labels: { app: notification-service }
+    spec:
+      initContainers:
+        - name: wait-for-kafka
+          image: wurstmeister/kafka
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              BROKER="kafka-svc:9092"
+              TEMP_TOPIC="notifications"
+              TEMP_GROUP="init-check-group"
+
+              # 1. Wait for the broker to be available
+              echo "Waiting for Kafka broker ($BROKER) to be ready..."
+              until /opt/kafka/bin/kafka-topics.sh --bootstrap-server $BROKER --list 2>/dev/null; do
+                echo "Broker not reachable yet. Retrying in 2 seconds..."
+                sleep 2
+              done
+              echo "Broker is reachable."
+
+              # 💡 NEW STEP: Give the broker time to establish internal readiness (Zookeeper sync)
+              echo "Pausing for 5 seconds to allow broker leadership election..."
+              sleep 5
+
+              # 2. Trigger the creation of __consumer_offsets and 'notifications' topic
+              echo "Triggering creation of internal topics..."
+              /opt/kafka/bin/kafka-console-consumer.sh \
+                --bootstrap-server $BROKER \
+                --topic $TEMP_TOPIC \
+                --from-beginning \
+                --timeout-ms 5000 \
+                --max-messages 1 \
+                --consumer-property group.id=$TEMP_GROUP
+
+              echo "Kafka readiness checks complete. Starting main container."
+      containers:
+        - name: notification-service
+          image: d33102/notification-service-svc:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - { containerPort: 8083 }
+            - { containerPort: 9999 }
+          envFrom: [{ secretRef: { name: notification-service-secret } }]
