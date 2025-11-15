@@ -6,7 +6,6 @@
   "timeout": "3000ms",
 
   "endpoints": [
-    /* ---------------- USER SERVICE ---------------- */
     {
       "endpoint": "/user/{rest}",
       "output_encoding": "no-op",
@@ -17,8 +16,6 @@
         }
       ]
     },
-
-    /* ---------------- AUTH SERVICE ---------------- */
     {
       "endpoint": "/auth/{rest}",
       "output_encoding": "no-op",
@@ -41,8 +38,6 @@
         }
       ]
     },
-
-    /* ---------------- APPLICATION SERVICE ---------------- */
     {
       "endpoint": "/application/{rest}",
       "output_encoding": "no-op",
@@ -53,8 +48,6 @@
         }
       ]
     },
-
-    /* ---------------- GROUP ---------------- */
     {
       "endpoint": "/group",
       "input_headers": [
@@ -145,8 +138,6 @@
         }
       ]
     },
-
-    /* ---------------- MEMBER ---------------- */
     {
       "endpoint": "/member",
       "input_headers": [
@@ -191,8 +182,6 @@
         }
       ]
     },
-
-    /* ---------------- SEARCH GRAPHQL ---------------- */
     {
       "endpoint": "/search/graphql",
       "method": "POST",
