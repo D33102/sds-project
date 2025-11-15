@@ -96,7 +96,7 @@
       ]
     },
     {
-      "endpoint": "/group",
+      "endpoint": "/group/",
       "output_encoding": "no-op",
       "input_headers": [
         "X-Member-ID",
@@ -106,7 +106,7 @@
       ],
       "backend": [
         {
-          "url_pattern": "/group",
+          "url_pattern": "/group/",
           "host": ["http://app-service-svc:3001"],
           "headers_to_pass": [
             "X-Member-ID",
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "endpoint": "/group",
+      "endpoint": "/group/",
       "method": "POST",
       "output_encoding": "no-op",
       "input_headers": [
@@ -129,7 +129,7 @@
       ],
       "backend": [
         {
-          "url_pattern": "/group",
+          "url_pattern": "/group/",
           "host": ["http://app-service-svc:3001"],
           "method": "POST",
           "headers_to_pass": [
@@ -142,7 +142,7 @@
       ]
     },
     {
-      "endpoint": "/group",
+      "endpoint": "/group/",
       "method": "PUT",
       "output_encoding": "no-op",
       "input_headers": [
@@ -153,7 +153,7 @@
       ],
       "backend": [
         {
-          "url_pattern": "/group",
+          "url_pattern": "/group/",
           "host": ["http://app-service-svc:3001"],
           "method": "PUT",
           "headers_to_pass": [
@@ -166,7 +166,7 @@
       ]
     },
     {
-      "endpoint": "/group",
+      "endpoint": "/group/",
       "method": "DELETE",
       "output_encoding": "no-op",
       "input_headers": [
@@ -177,7 +177,7 @@
       ],
       "backend": [
         {
-          "url_pattern": "/group",
+          "url_pattern": "/group/",
           "host": ["http://app-service-svc:3001"],
           "method": "DELETE",
           "headers_to_pass": [
@@ -284,7 +284,7 @@
       ]
     },
     {
-      "endpoint": "/bulletin",
+      "endpoint": "/bulletin/",
       "output_encoding": "no-op",
       "input_headers": [
         "X-Member-ID",
@@ -294,7 +294,7 @@
       ],
       "backend": [
         {
-          "url_pattern": "/bulletin",
+          "url_pattern": "/bulletin/",
           "host": ["http://app-service-svc:3001"],
           "headers_to_pass": [
             "X-Member-ID",
@@ -306,7 +306,7 @@
       ]
     },
     {
-      "endpoint": "/bulletin",
+      "endpoint": "/bulletin/",
       "method": "POST",
       "output_encoding": "no-op",
       "input_headers": [
@@ -317,7 +317,7 @@
       ],
       "backend": [
         {
-          "url_pattern": "/bulletin",
+          "url_pattern": "/bulletin/",
           "host": ["http://app-service-svc:3001"],
           "method": "POST",
           "headers_to_pass": [
@@ -330,7 +330,7 @@
       ]
     },
     {
-      "endpoint": "/bulletin",
+      "endpoint": "/bulletin/",
       "method": "PUT",
       "output_encoding": "no-op",
       "input_headers": [
@@ -341,7 +341,7 @@
       ],
       "backend": [
         {
-          "url_pattern": "/bulletin",
+          "url_pattern": "/bulletin/",
           "host": ["http://app-service-svc:3001"],
           "method": "PUT",
           "headers_to_pass": [
@@ -354,7 +354,7 @@
       ]
     },
     {
-      "endpoint": "/bulletin",
+      "endpoint": "/bulletin/",
       "method": "DELETE",
       "output_encoding": "no-op",
       "input_headers": [
@@ -365,7 +365,7 @@
       ],
       "backend": [
         {
-          "url_pattern": "/bulletin",
+          "url_pattern": "/bulletin/",
           "host": ["http://app-service-svc:3001"],
           "method": "DELETE",
           "headers_to_pass": [
