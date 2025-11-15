@@ -134,7 +134,7 @@ spec:
       labels: { app: zookeeper }
     spec:
       containers:
-        - image: apache/zookeeper
+        - image: zookeeper
           imagePullPolicy: IfNotPresent
           name: zookeeper
           ports:
