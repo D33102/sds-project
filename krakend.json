@@ -92,8 +92,6 @@
         }
       ]
     },
-
-    /* ---------------- BULLETIN ---------------- */
     {
       "endpoint": "/bulletin",
       "input_headers": [
