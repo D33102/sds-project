@@ -134,7 +134,7 @@ spec:
       labels: { app: zookeeper }
     spec:
       containers:
-        - image: wurstmeister/zookeeper
+        - image: bitnami/zookeeper
           imagePullPolicy: IfNotPresent
           name: zookeeper
           ports:
@@ -181,7 +181,7 @@ spec:
               value: PLAINTEXT://:9092
             - name: KAFKA_ADVERTISED_LISTENERS
               value: PLAINTEXT://kafka-svc:9092
-          image: wurstmeister/kafka
+          image: bitnami/kafka
           imagePullPolicy: IfNotPresent
           name: kafka
           ports:
