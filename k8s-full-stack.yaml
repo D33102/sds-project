@@ -231,7 +231,7 @@ spec:
             ]
       containers:
         - name: user-service
-          image: user-service:latest
+          image: d33102/user-service-svc:latest
           imagePullPolicy: IfNotPresent
           ports: [{ containerPort: 8081 }]
           envFrom: [{ secretRef: { name: user-service-secret } }]
@@ -280,7 +280,7 @@ spec:
             ]
       containers:
         - name: auth-service
-          image: auth-service:latest
+          image: d33102/auth-service-svc:latest
           imagePullPolicy: IfNotPresent
           ports: [{ containerPort: 8082 }]
           envFrom: [{ secretRef: { name: auth-service-secret } }]
@@ -353,7 +353,7 @@ spec:
               echo "Kafka readiness checks complete. Starting main container."
       containers:
         - name: notification-service
-          image: notification-service:latest
+          image: d33102/notification-service-svc:latest
           imagePullPolicy: IfNotPresent
           ports:
             - { containerPort: 8083 }
@@ -409,7 +409,7 @@ spec:
             - 'until nc -z notification-service-svc 9999; do echo "waiting for notification"; sleep 2; done;'
       containers:
         - name: app-service
-          image: app-service:latest
+          image: d33102/app-service-svc:latest
           imagePullPolicy: IfNotPresent
           ports: [{ containerPort: 3001 }]
           envFrom: [{ secretRef: { name: app-service-secret } }]
@@ -500,7 +500,7 @@ spec:
             - 'until nc -z user-service-svc 8081; do echo "waiting for user-service"; sleep 2; done;'
       containers:
         - name: search-service
-          image: search-service:latest
+          image: d33102/search-service-svc:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 4000
